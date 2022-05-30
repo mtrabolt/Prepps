@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prepps.Api", "Prepps.Api\Prepps.Api.csproj", "{6AA8A56C-B49E-4518-9B62-762F19C32F6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prepps", "Prepps\Prepps.csproj", "{34BF91D2-59DC-4CA6-B979-81E5DBF80B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prepps.Tests", "Prepps.Tests\Prepps.Tests.csproj", "{A3F7EFB7-049D-4913-BAD8-B23DBC9D166B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AA8A56C-B49E-4518-9B62-762F19C32F6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA8A56C-B49E-4518-9B62-762F19C32F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA8A56C-B49E-4518-9B62-762F19C32F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA8A56C-B49E-4518-9B62-762F19C32F6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34BF91D2-59DC-4CA6-B979-81E5DBF80B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34BF91D2-59DC-4CA6-B979-81E5DBF80B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34BF91D2-59DC-4CA6-B979-81E5DBF80B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34BF91D2-59DC-4CA6-B979-81E5DBF80B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F7EFB7-049D-4913-BAD8-B23DBC9D166B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F7EFB7-049D-4913-BAD8-B23DBC9D166B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F7EFB7-049D-4913-BAD8-B23DBC9D166B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F7EFB7-049D-4913-BAD8-B23DBC9D166B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

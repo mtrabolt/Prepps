@@ -1,0 +1,46 @@
+version: '3.9'
+
+networks:
+  proxynet:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - proxynet
+    
+  api:
+    build: 
+      context: ../../
+      dockerfile: Prepps.Api/Dockerfile
+    ports:
+      - "5000:80"
+      - "5001:443"
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__Postgres: "host=host.docker.internal;port=5432;database=postgres;username=postgres;password=postgres"
+    networks:
+      - proxynet
+ 
+#  frontend:
+#    build:
+#      context: ../../Prepps.Frontend/prepps-frontend
+#      dockerfile: Dockerfile
+#    ports:
+#      - "3000:3000"
+#    networks:
+#      - proxynet
+#  
+volumes:
+  db:
+    driver: local
