@@ -32,15 +32,15 @@ services:
     networks:
       - proxynet
  
-#  frontend:
-#    build:
-#      context: ../../Prepps.Frontend/prepps-frontend
-#      dockerfile: Dockerfile
-#    ports:
-#      - "3000:3000"
-#    networks:
-#      - proxynet
-#  
+  frontend: 
+    build:
+     context: ../../Prepps.Svelte
+     dockerfile: Dockerfile
+    ports:
+       - "3000:80"
+    networks:
+       - proxynet
+
 volumes:
   db:
     driver: local
