@@ -38,6 +38,8 @@ services:
      dockerfile: Dockerfile
     ports:
        - "3000:80"
+    environment:
+      api: 'http://localhost:5000'
     networks:
        - proxynet
 
