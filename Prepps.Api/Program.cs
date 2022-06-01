@@ -35,6 +35,11 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         .InstancePerDependency();
 });
 
+builder.WebHost.ConfigureKestrel((_, options) =>
+{
+    options.AllowAlternateSchemes = true;
+});
+
 builder.Services.AddMarten(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("Postgres");
