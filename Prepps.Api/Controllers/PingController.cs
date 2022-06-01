@@ -4,9 +4,9 @@ namespace Prepps.Api.Controllers;
 
 public class PingController : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("/")]
     public IActionResult Index()
     {
-        return Ok($"Welcome to {typeof(PingController).Namespace}");
+        return Ok($"Welcome to {typeof(PingController).Assembly.GetName().Name}");
     }
 }
