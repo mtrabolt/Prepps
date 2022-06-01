@@ -3,3 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+Prepps.Svelte/package-lock.json
+Prepps.Svelte/public/build/
