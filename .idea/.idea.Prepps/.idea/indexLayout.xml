@@ -3,6 +3,7 @@
   <component name="UserContentModel">
     <attachedFolders>
       <Path>Prepps.Frontend</Path>
+      <Path>Prepps.Svelte</Path>
     </attachedFolders>
     <explicitIncludes />
     <explicitExcludes />
