@@ -9,8 +9,10 @@
     <ItemGroup>
       <PackageReference Include="Autofac" Version="6.3.0" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+      <PackageReference Include="Baseline" Version="3.2.2" />
       <PackageReference Include="Cronos" Version="0.7.1" />
-      <PackageReference Include="Marten" Version="5.0.0" />
+      <PackageReference Include="Google.Cloud.Firestore" Version="3.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     </ItemGroup>
 
 </Project>

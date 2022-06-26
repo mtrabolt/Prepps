@@ -1,23 +1,27 @@
-using Marten;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Subscriptions.Queries;
 
 public interface IGetSubscriptions
 {
-    IEnumerable<Subscription> Execute();
+    Task<IEnumerable<Subscription>> Execute();
 }
 
 public class GetSubscriptions : IGetSubscriptions
 {
-    private readonly IDocumentSession _session;
+    private readonly FirestoreDb _db;
 
-    public GetSubscriptions(IDocumentSession session)
+    public GetSubscriptions(FirestoreDb db)
     {
-        _session = session;
+        _db = db;
     }
-    
-    public IEnumerable<Subscription> Execute()
+
+    public async Task<IEnumerable<Subscription>> Execute()
     {
-        return _session.Query<Subscription>();
+        var collection = _db.Collection(nameof(Subscription));
+        var snapshot = await collection.GetSnapshotAsync();
+
+        var subs = snapshot.Documents.Select(x => x.ConvertTo<Subscription>()).ToList();
+        return subs;
     }
 }

@@ -1,4 +1,4 @@
-using Marten;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Products.Commands;
 
@@ -9,16 +9,16 @@ public interface IStoreProduct
 
 public class StoreProduct : IStoreProduct
 {
-    private readonly IDocumentSession _session;
+    private readonly FirestoreDb _db;
 
-    public StoreProduct(IDocumentSession session)
+    public StoreProduct(FirestoreDb db)
     {
-        _session = session;
+        _db = db;
     }
     
     public async Task Execute(Product product)
     {
-        _session.Store(product);
-        await _session.SaveChangesAsync();
+        var document = _db.Collection(nameof(Product)).Document(product.Id.ToString());
+        await document.SetAsync(product);
     }
 }

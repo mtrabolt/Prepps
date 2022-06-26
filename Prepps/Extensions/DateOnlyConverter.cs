@@ -1,9 +1,10 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Extensions;
 
-public class DateOnlyConverter : JsonConverter<DateOnly>
+public class DateOnlyConverter : JsonConverter<DateOnly>, IFirestoreConverter<DateOnly>
 {
     private readonly string _serializationFormat;
     public DateOnlyConverter() : this(null)
@@ -22,4 +23,14 @@ public class DateOnlyConverter : JsonConverter<DateOnly>
     public override void Write(Utf8JsonWriter writer, DateOnly value, 
         JsonSerializerOptions options)
         => writer.WriteStringValue(value.ToString(_serializationFormat));
+
+    public object ToFirestore(DateOnly value)
+    {
+        return value.ToString();
+    }
+
+    public DateOnly FromFirestore(object value)
+    {
+        return DateOnly.Parse(value.ToString()!);
+    }
 }

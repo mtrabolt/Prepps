@@ -1,24 +1,25 @@
-using Marten;
-using Marten.Linq;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Products.Queries;
 
 public interface IGetProducts
 {
-    IEnumerable<Product> Execute();
+    Task<IEnumerable<Product>> Execute();
 }
 
 public class GetProducts : IGetProducts
 {
-    private readonly IDocumentSession _session;
-
-    public GetProducts(IDocumentSession session)
+    private readonly FirestoreDb _db;
+    
+    public GetProducts(FirestoreDb db)
     {
-        _session = session;
+        _db = db;
     }
     
-    public IEnumerable<Product> Execute()
+    public async Task<IEnumerable<Product>> Execute()
     {
-        return _session.Query<Product>();
+        var collection = _db.Collection(nameof(Product));
+        var snapshot = await collection.GetSnapshotAsync();
+        return snapshot.Documents.Select(x => x.ConvertTo<Product>());
     }
 }

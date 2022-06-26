@@ -1,4 +1,4 @@
-using Marten;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Subscriptions.Commands;
 
@@ -9,16 +9,16 @@ public interface IStoreSubscription
 
 public class StoreSubscription : IStoreSubscription
 {
-    private readonly IDocumentSession _session;
+    private readonly FirestoreDb _db;
 
-    public StoreSubscription(IDocumentSession session)
+    public StoreSubscription(FirestoreDb db)
     {
-        _session = session;
+        _db = db;
     }
-    
+
     public async Task Execute(Subscription subscription)
     {
-        _session.Store(subscription);
-        await _session.SaveChangesAsync();
+        var document = _db.Collection(nameof(Subscription)).Document(subscription.Id);
+        await document.SetAsync(subscription);
     }
 }

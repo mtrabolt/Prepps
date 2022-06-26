@@ -1,10 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Marten;
-using Marten.Services.Json;
-using Prepps.Products;
+using Google.Cloud.Firestore;
 using Prepps.Products.Queries;
-using Weasel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,31 +30,14 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         .AsImplementedInterfaces()
         .AsSelf()
         .InstancePerDependency();
+
+    containerBuilder.RegisterInstance(FirestoreDb.Create("prepps")).SingleInstance();
 });
 
 builder.WebHost.ConfigureKestrel((_, options) =>
 {
     options.AllowAlternateSchemes = true;
 });
-
-builder.Services.AddMarten(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("Postgres");
-
-    Console.WriteLine(connectionString);
-    
-    options.Connection(connectionString);
-    
-    // Opt into System.Text.Json serialization
-    options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
-
-    options.Schema.For<Product>().Index(x => x.Name);
-
-    if (builder.Environment.IsDevelopment())
-    {
-        options.AutoCreateSchemaObjects = AutoCreate.All;
-    }
-}).UseLightweightSessions();
 
 var app = builder.Build();
 

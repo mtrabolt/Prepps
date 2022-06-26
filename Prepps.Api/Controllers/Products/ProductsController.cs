@@ -26,8 +26,8 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<ICollection<ProductReadModel>> GetProducts() =>
-        Ok(_getProducts.Execute().Select(ProductReadModel.FromProduct).ToList());
+    public async Task<ActionResult<ICollection<ProductReadModel>>> GetProducts() =>
+        Ok((await _getProducts.Execute()).Select(ProductReadModel.FromProduct).ToList());
 
     [HttpPost]
     public async Task<IActionResult> StoreProduct([FromBody] ProductWriteModel productWriteModel)
@@ -39,7 +39,7 @@ public class ProductsController : ControllerBase
         
         var product = new Product
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.NewGuid().ToString(),
             Name = productWriteModel.Name,
             ExpiresAt = DateOnly.FromDateTime(productWriteModel.ExpiresAt.ToDateTime()),
         };

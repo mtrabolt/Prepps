@@ -1,4 +1,4 @@
-using Marten;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Products.Commands;
 
@@ -9,26 +9,26 @@ public interface IUpdateProduct
 
 public class UpdateProduct : IUpdateProduct
 {
-    private readonly IDocumentSession _session;
+    private readonly FirestoreDb _db;
 
-    public UpdateProduct(IDocumentSession session)
+    private readonly IStoreProduct _storeProduct;
+
+    public UpdateProduct(FirestoreDb db,
+        IStoreProduct storeProduct)
     {
-        _session = session;
+        _db = db;
+        _storeProduct = storeProduct;
     }
     
     public async Task Execute(Guid id, string name, DateOnly expiresAt)
     {
-        var product = await _session.LoadAsync<Product>(id);
+        var document = _db.Collection(nameof(Product)).Document(id.ToString());
+        var snapshot = await document.GetSnapshotAsync();
+        var product = snapshot.ConvertTo<Product>();
 
-        if (product == null)
-        {
-            throw new Exception("productNotFound");
-        }
-        
         product.Name = name;
         product.ExpiresAt = expiresAt;
 
-        _session.Store(product);
-        await _session.SaveChangesAsync();
+        await _storeProduct.Execute(product);
     }
 }

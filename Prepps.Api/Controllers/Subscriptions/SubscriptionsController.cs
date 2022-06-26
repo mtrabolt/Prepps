@@ -23,7 +23,7 @@ public class SubscriptionsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult GetSubscriptions() => Ok(_getSubscriptions.Execute());
+    public async Task<ActionResult> GetSubscriptions() => Ok(await _getSubscriptions.Execute());
 
     [HttpPost]
     public async Task<ActionResult> CreateSubscription([FromBody] string email)
@@ -32,7 +32,7 @@ public class SubscriptionsController : ControllerBase
         
         var subscription = new Subscription
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.NewGuid().ToString(),
             Email = email,
         };
 

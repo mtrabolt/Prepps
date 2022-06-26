@@ -1,4 +1,4 @@
-using Marten;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Subscriptions.Commands;
 
@@ -9,16 +9,16 @@ public interface IDeleteSubscription
 
 public class DeleteSubscription : IDeleteSubscription
 {
-    private readonly IDocumentSession _session;
+    private readonly FirestoreDb _db;
 
-    public DeleteSubscription(IDocumentSession session)
+    public DeleteSubscription(FirestoreDb db)
     {
-        _session = session;
+        _db = db;
     }
-    
+
     public async Task Execute(Guid id)
     {
-        _session.Delete<Subscription>(id);
-        await _session.SaveChangesAsync();
+        var document = _db.Collection(nameof(Subscription)).Document(id.ToString());
+        await document.DeleteAsync();
     }
 }

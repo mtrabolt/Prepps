@@ -1,4 +1,4 @@
-using Marten;
+using Google.Cloud.Firestore;
 
 namespace Prepps.Products.Commands;
 
@@ -9,16 +9,16 @@ public interface IDeleteProduct
 
 public class DeleteProduct : IDeleteProduct
 {
-    private readonly IDocumentSession _session;
+    private readonly FirestoreDb _db;
 
-    public DeleteProduct(IDocumentSession session)
+    public DeleteProduct(FirestoreDb db)
     {
-        _session = session;
+        _db = db;
     }
-    
+
     public async Task Execute(Guid id)
     {
-        _session.Delete<Product>(id);
-        await _session.SaveChangesAsync();
+        var document = _db.Collection(nameof(Product)).Document(id.ToString());
+        await document.DeleteAsync();
     }
 }
