@@ -81,7 +81,7 @@ export default {
 		// Rollup replace process environment
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
-			'process.env.API_ENDPOINT': () => JSON.stringify(production.env?.API_ENDPOINT ?? 'http://localhost:5000'),
+			'process.env.API_ENDPOINT': () => JSON.stringify(process.env.API_ENDPOINT ?? 'http://localhost:5000'),
 			__buildDate__: () => JSON.stringify(new Date()),
 			__buildVersion: 15
 		})

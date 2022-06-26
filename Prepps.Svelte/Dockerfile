@@ -1,7 +1,6 @@
 FROM node:12 AS build
 
 WORKDIR /app
-ENV API_ENDPOINT='https://prepps-api.arrangeer.com/'
 
 COPY package.json ./
 RUN npm install
