@@ -1,9 +1,9 @@
 <script lang="ts">
-    import ItemModel from "../models/ItemModel";
+    import type ItemModel from "src/models/ItemModel";
     import Button from "./Button.svelte";
 
     export let item: ItemModel
-    export let deleteFunc
+    export let deleteFunc;
 
     // Create store for items
     let loadingDelete = false

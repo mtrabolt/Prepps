@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { SvelteToast } from '@zerodevx/svelte-toast' // https://github.com/zerodevx/svelte-toast
-	import Item from './components/Item.svelte'
-	import Filter from './components/Filter.svelte'
-	import ItemModel, { ItemCreateModel } from './models/ItemModel'
-	import NewItem from './components/NewItem.svelte';
+	import Item from '../components/Item.svelte'
+	// import Filter from './components/Filter.svelte'
+	import Filter from '../components/Filter.svelte'
+	import type ItemModel from '../models/ItemModel';
+	import type { ItemCreateModel } from '../models/ItemModel'
+	import NewItem from '../components/NewItem.svelte';
 	import { onMount } from 'svelte';
-	import * as ProductApi from './apis/products';
-	import Subscribe from './components/Subscribe.svelte';
-	import Notification from './services/Toast'
+	import * as ProductApi from '../apis/products';
+	import Subscribe from '../components/Subscribe.svelte';
+	import Notification from '../services/Toast'
 
 	let items: ItemModel[] = []
 

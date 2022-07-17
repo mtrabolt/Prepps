@@ -2,7 +2,7 @@
     import * as SubscriptionApi from "../apis/subscriptions";
     import Button from "./Button.svelte";
     import Notification from '../services/Toast'
-    import SubscriptionModel from "../models/SubscriptionModel";
+    import type SubscriptionModel from "src/models/SubscriptionModel"
 
     let subscriptions = SubscriptionApi.getSubscriptions()
 

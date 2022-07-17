@@ -1,6 +1,7 @@
+import type { ItemCreateModel } from "src/models/ItemModel"
+import type ItemModel from "src/models/ItemModel"
 import API from "../services/Api"
 import Notification from "../services/Toast"
-import ItemModel, { ItemCreateModel } from "../models/ItemModel"
 
 export const getProducts = async () => {
     try {

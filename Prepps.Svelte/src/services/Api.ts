@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosApi = axios.create({
-    baseURL: process.env.API_ENDPOINT,
+    baseURL: '/apis' //import.meta.env.API_ENDPOINT,
 })
 
 const apiRequest = <T>(method, url, request) => {

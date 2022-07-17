@@ -1,4 +1,4 @@
-import SubscriptionModel, { SubscriptionCreateModel } from '../models/SubscriptionModel'
+import type SubscriptionModel from 'src/models/SubscriptionModel'
 import API from '../services/Api'
 import Notification from '../services/Toast'
 
