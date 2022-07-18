@@ -3,7 +3,7 @@ FROM node:14.15.0 as build
 # install dependencies
 WORKDIR /app
 COPY package.json ./
-RUN npm ci
+RUN npm i
 
 # Copy all local files into the image.
 COPY . .
