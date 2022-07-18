@@ -1,4 +1,4 @@
-FROM node:14.15.0 as build
+FROM node:current-slim as build
 
 # install dependencies
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm run build
 # Only copy over the Node pieces we need
 # ~> Saves 35MB
 ###
-FROM node:14.15.0
+FROM node:current-slim
 
 WORKDIR /app
 COPY --from=build /app/.svelte-kit/build/. .
